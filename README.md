@@ -1,2 +1,2 @@
-# roomease-main
+# roomease
 Final Submission
