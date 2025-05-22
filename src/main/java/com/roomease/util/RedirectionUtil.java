@@ -21,7 +21,6 @@ public class RedirectionUtil {
 	public static final String profileUrl = baseUrl + "profile.jsp";
 	public static final String roomdUrl = baseUrl + "roomd.jsp";
 	public static final String contactdetailsUrl = baseUrl + "contactdetails.jsp";
-	
 
 	public void setMsgAttribute(HttpServletRequest req, String msgType, String msg) {
 		req.setAttribute(msgType, msg);

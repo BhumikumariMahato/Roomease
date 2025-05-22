@@ -6,29 +6,8 @@ import java.io.IOException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
 
-/**
- * Utility class for handling image file uploads.
- * <p>
- * This class provides methods for extracting the file name from a {@link Part}
- * object and uploading the image file to a specified directory on the server.
- * </p>
- */
 public class ImageUtil {
 
-	/**
-	 * Extracts the file name from the given {@link Part} object based on the
-	 * "content-disposition" header.
-	 * 
-	 * <p>
-	 * This method parses the "content-disposition" header to retrieve the file name
-	 * of the uploaded image. If the file name cannot be determined, a default name
-	 * "download.png" is returned.
-	 * </p>
-	 * 
-	 * @param part the {@link Part} object representing the uploaded file.
-	 * @return the extracted file name. If no filename is found, returns a default
-	 *         name "download.png".
-	 */
 	public String getImageNameFromPart(Part part) {
 		// Retrieve the content-disposition header from the part
 		String contentDisp = part.getHeader("content-disposition");
@@ -57,43 +36,26 @@ public class ImageUtil {
 		return imageName;
 	}
 
-	/**
-	 * Uploads the image file from the given {@link Part} object to a specified
-	 * directory on the server.
-	 * 
-	 * <p>
-	 * This method ensures that the directory where the file will be saved exists
-	 * and creates it if necessary. It writes the uploaded file to the server's file
-	 * system. Returns {@code true} if the upload is successful, and {@code false}
-	 * otherwise.
-	 * </p>
-	 * 
-	 * @param part the {@link Part} object representing the uploaded image file.
-	 * @return {@code true} if the file was successfully uploaded, {@code false}
-	 *         otherwise.
-	 */
 	public boolean uploadImage(Part part, String rootPath, String saveFolder, HttpServletRequest request) {
-	    // Save path in actual physical directory (you can customize this path)
-	    String uploadDir = "C:/Users/kunwa/eclipse-workspace/roomease/src/main/webapp/images/" + saveFolder;
-	    File fileSaveDir = new File(uploadDir);
+		// Save path in actual physical directory (you can customize this path)
+		String uploadDir = "C:/Users/kunwa/eclipse-workspace/roomease/src/main/webapp/images/" + saveFolder;
+		File fileSaveDir = new File(uploadDir);
 
-	    if (!fileSaveDir.exists() && !fileSaveDir.mkdirs()) {
-	        return false; // Failed to create directory
-	    }
+		if (!fileSaveDir.exists() && !fileSaveDir.mkdirs()) {
+			return false; // Failed to create directory
+		}
 
-	    try {
-	        String imageName = getImageNameFromPart(part);
-	        part.write(uploadDir + File.separator + imageName); // Save to local file system
-	        return true;
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return false;
-	    }
+		try {
+			String imageName = getImageNameFromPart(part);
+			part.write(uploadDir + File.separator + imageName); // Save to local file system
+			return true;
+		} catch (IOException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
-
-	
 	public String getSavePath(String saveFolder) {
-		return "C:/Users/kunwa/eclipse-workspace/roomease/src/main/webapp/images/rooms"+saveFolder+"/";
+		return "C:/Users/kunwa/eclipse-workspace/roomease/src/main/webapp/images/rooms" + saveFolder + "/";
 	}
 }

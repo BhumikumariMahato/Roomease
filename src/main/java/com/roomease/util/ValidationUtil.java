@@ -42,18 +42,22 @@ public class ValidationUtil {
 	public boolean doPasswordsMatch(String password, String retypePassword) {
 		return !isNullOrEmpty(password) && !isNullOrEmpty(retypePassword) && password.equals(retypePassword);
 	}
-	 public static boolean isNulOrEmpty(String value) {
-	        return value == null || value.trim().isEmpty();
-	    }
-	 public static boolean isAlphanuericStartingWithLetter(String value) {
-	        return value != null && value.matches("^[a-zA-Z][a-zA-Z0-9]*$");
-	    }
-	 public static boolean isValiPhoneNumber(String number) {
-	        return number != null && number.matches("^98\\d{8}$");
-	    }
-	 public static boolean isValiEmail(String email) {
-	        String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-	        return email != null && Pattern.matches(emailRegex, email);
-	    }
+
+	public static boolean isNulOrEmpty(String value) {
+		return value == null || value.trim().isEmpty();
+	}
+
+	public static boolean isAlphanuericStartingWithLetter(String value) {
+		return value != null && value.matches("^[a-zA-Z][a-zA-Z0-9]*$");
+	}
+
+	public static boolean isValiPhoneNumber(String number) {
+		return number != null && number.matches("^98\\d{8}$");
+	}
+
+	public static boolean isValiEmail(String email) {
+		String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
+		return email != null && Pattern.matches(emailRegex, email);
+	}
 
 }

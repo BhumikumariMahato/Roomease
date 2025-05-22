@@ -20,7 +20,8 @@ body {
 	margin: 0;
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-				url('${contextPath}/images/background.png') no-repeat center center fixed;
+		url('${contextPath}/images/background.png') no-repeat center center
+		fixed;
 	background-size: cover;
 	color: #fff;
 }
@@ -38,7 +39,7 @@ body {
 	padding: 30px 20px;
 	border-radius: 12px;
 	margin-right: 20px;
-	box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .nav {
@@ -153,7 +154,8 @@ tr:hover {
 	<div class="container">
 		<div class="sidebar">
 			<ul class="nav">
-				<li><a href="${contextPath}/dashboard"><span class="icon">🏠</span> Dashboard</a></li>
+				<li><a href="${contextPath}/dashboard"><span class="icon">🏠</span>
+						Dashboard</a></li>
 				<li><a href="${contextPath}/logout"><span class="icon">🔒</span>Logout</a></li>
 			</ul>
 		</div>
@@ -188,12 +190,14 @@ tr:hover {
 								<td>${user.user_email}</td>
 								<td>${user.user_contact_number}</td>
 								<td>
-									<form action="${contextPath}/Update" method="post" style="display: inline;">
+									<form action="${contextPath}/Update" method="post"
+										style="display: inline;">
 										<input type="hidden" name="user_ID" value="${user.user_ID}">
 										<input type="hidden" name="action" value="updateForm">
 										<button class="action-btn" type="submit">Edit</button>
 									</form>
-									<form action="${contextPath}/Update" method="post" style="display: inline;">
+									<form action="${contextPath}/Update" method="post"
+										style="display: inline;">
 										<input type="hidden" name="user_ID" value="${user.user_ID}">
 										<input type="hidden" name="action" value="delete">
 										<button class="action-btn" type="submit">Delete</button>

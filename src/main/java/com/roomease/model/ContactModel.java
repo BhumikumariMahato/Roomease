@@ -1,13 +1,13 @@
 package com.roomease.model;
 
 public class ContactModel {
-	
+
 	private int contact_form_id;
 	private String first_name;
 	private String last_name;
 	private String form_email;
 	private String form_message;
-	
+
 	private UserModel user_ID;
 
 	public ContactModel(int contact_form_id, String first_name, String last_name, String form_email,
@@ -73,5 +73,4 @@ public class ContactModel {
 		this.user_ID = user_ID;
 	}
 
-	
 }

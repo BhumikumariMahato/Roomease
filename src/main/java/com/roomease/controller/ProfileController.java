@@ -45,68 +45,68 @@ public class ProfileController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-	        throws ServletException, IOException {
+			throws ServletException, IOException {
 
-	    String username = (String) SessionUtil.getAttribute(request, "user_name");
+		String username = (String) SessionUtil.getAttribute(request, "user_name");
 
-	    if (username == null) {
-	        response.sendRedirect(request.getContextPath() + "/login");
-	        return;
-	    }
+		if (username == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 
-	    UserModel existingUser = customerService.getUserByUsername(username);
-	    if (existingUser == null) {
-	        request.setAttribute("error", "Unable to load user data.");
-	        request.getRequestDispatcher(RedirectionUtil.profileUrl).forward(request, response);
-	        return;
-	    }
+		UserModel existingUser = customerService.getUserByUsername(username);
+		if (existingUser == null) {
+			request.setAttribute("error", "Unable to load user data.");
+			request.getRequestDispatcher(RedirectionUtil.profileUrl).forward(request, response);
+			return;
+		}
 
-	    String name = request.getParameter("user_name");
-	    String email = request.getParameter("user_email");
-	    String password = request.getParameter("user_password");
-	    String confirmPassword = request.getParameter("confirm_password");
-	    String contact = request.getParameter("user_contact_number");
+		String name = request.getParameter("user_name");
+		String email = request.getParameter("user_email");
+		String password = request.getParameter("user_password");
+		String confirmPassword = request.getParameter("confirm_password");
+		String contact = request.getParameter("user_contact_number");
 
-	    if (!password.equals(confirmPassword)) {
-	        request.setAttribute("error", "Passwords do not match.");
-	        existingUser.setUser_name(name);
-	        existingUser.setUser_email(email);
-	        existingUser.setUser_password(password);
-	        existingUser.setUser_contact_number(contact);
+		if (!password.equals(confirmPassword)) {
+			request.setAttribute("error", "Passwords do not match.");
+			existingUser.setUser_name(name);
+			existingUser.setUser_email(email);
+			existingUser.setUser_password(password);
+			existingUser.setUser_contact_number(contact);
 
-	        request.setAttribute("user", existingUser);
-	        request.setAttribute("customer", SessionUtil.getAttribute(request, "customer"));
-	        request.getRequestDispatcher(RedirectionUtil.profileUrl).forward(request, response);
-	        return;
-	    }
+			request.setAttribute("user", existingUser);
+			request.setAttribute("customer", SessionUtil.getAttribute(request, "customer"));
+			request.getRequestDispatcher(RedirectionUtil.profileUrl).forward(request, response);
+			return;
+		}
 
-	    try {
-	        String encryptedPassword = PasswordUtil.encrypt(name, password);
+		try {
+			String encryptedPassword = PasswordUtil.encrypt(name, password);
 
-	        existingUser.setUser_name(name);
-	        existingUser.setUser_email(email);
-	        existingUser.setUser_password(encryptedPassword);
-	        existingUser.setUser_contact_number(contact);
+			existingUser.setUser_name(name);
+			existingUser.setUser_email(email);
+			existingUser.setUser_password(encryptedPassword);
+			existingUser.setUser_contact_number(contact);
 
-	        boolean updated = customerService.updateUserinfo(existingUser);
+			boolean updated = customerService.updateUserinfo(existingUser);
 
-	        if (updated) {
-	            request.setAttribute("success", "Profile updated successfully!");
-	        } else {
-	            request.setAttribute("error", "Profile update failed.");
-	        }
+			if (updated) {
+				request.setAttribute("success", "Profile updated successfully!");
+			} else {
+				request.setAttribute("error", "Profile update failed.");
+			}
 
-	        String decryptedPassword = PasswordUtil.decrypt(encryptedPassword, name);
-	        existingUser.setUser_password(decryptedPassword);
+			String decryptedPassword = PasswordUtil.decrypt(encryptedPassword, name);
+			existingUser.setUser_password(decryptedPassword);
 
-	    } catch (Exception e) {
-	        request.setAttribute("error", "Encryption error: " + e.getMessage());
+		} catch (Exception e) {
+			request.setAttribute("error", "Encryption error: " + e.getMessage());
 
-	        existingUser.setUser_password(password);
-	    }
+			existingUser.setUser_password(password);
+		}
 
-	    request.setAttribute("user", existingUser);
-	    request.setAttribute("customer", SessionUtil.getAttribute(request, "customer"));
-	    request.getRequestDispatcher(RedirectionUtil.profileUrl).forward(request, response);
+		request.setAttribute("user", existingUser);
+		request.setAttribute("customer", SessionUtil.getAttribute(request, "customer"));
+		request.getRequestDispatcher(RedirectionUtil.profileUrl).forward(request, response);
 	}
 }

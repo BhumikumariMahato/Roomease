@@ -58,35 +58,32 @@ public class PasswordUtil {
 
 	// return a base64 encoded AES encrypted text
 	public static String encrypt(String user_name, String user_password) throws Exception {
-	    try {
-	        // 16 bytes salt
-	        byte[] salt = getRandomNonce(SALT_LENGTH_BYTE);
+		try {
+			// 16 bytes salt
+			byte[] salt = getRandomNonce(SALT_LENGTH_BYTE);
 
-	        // GCM recommended 12 bytes iv
-	        byte[] iv = getRandomNonce(IV_LENGTH_BYTE);
+			// GCM recommended 12 bytes iv
+			byte[] iv = getRandomNonce(IV_LENGTH_BYTE);
 
-	        // secret key from password
-	        SecretKey aesKeyFromPassword = getAESKeyFromPassword(user_name.toCharArray(), salt);
+			// secret key from password
+			SecretKey aesKeyFromPassword = getAESKeyFromPassword(user_name.toCharArray(), salt);
 
-	        Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
+			Cipher cipher = Cipher.getInstance(ENCRYPT_ALGO);
 
-	        // ASE-GCM needs GCMParameterSpec
-	        cipher.init(Cipher.ENCRYPT_MODE, aesKeyFromPassword, new GCMParameterSpec(TAG_LENGTH_BIT, iv));
+			// ASE-GCM needs GCMParameterSpec
+			cipher.init(Cipher.ENCRYPT_MODE, aesKeyFromPassword, new GCMParameterSpec(TAG_LENGTH_BIT, iv));
 
-	        byte[] cipherText = cipher.doFinal(user_password.getBytes(UTF_8));
+			byte[] cipherText = cipher.doFinal(user_password.getBytes(UTF_8));
 
-	        // prefix IV and Salt to cipher text
-	        byte[] cipherTextWithIvSalt = ByteBuffer.allocate(iv.length + salt.length + cipherText.length)
-	            .put(iv)
-	            .put(salt)
-	            .put(cipherText)
-	            .array();
+			// prefix IV and Salt to cipher text
+			byte[] cipherTextWithIvSalt = ByteBuffer.allocate(iv.length + salt.length + cipherText.length).put(iv)
+					.put(salt).put(cipherText).array();
 
-	        return Base64.getEncoder().encodeToString(cipherTextWithIvSalt);
-	    } catch (Exception ex) {
-	        Logger.getLogger(PasswordUtil.class.getName()).log(Level.SEVERE, "Password encryption failed", ex);
-	        throw new Exception("Password encryption failed", ex);
-	    }
+			return Base64.getEncoder().encodeToString(cipherTextWithIvSalt);
+		} catch (Exception ex) {
+			Logger.getLogger(PasswordUtil.class.getName()).log(Level.SEVERE, "Password encryption failed", ex);
+			throw new Exception("Password encryption failed", ex);
+		}
 	}
 
 	public static String decrypt(String encryptedPassword, String username) {

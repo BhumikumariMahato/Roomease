@@ -17,37 +17,36 @@ import java.util.List;
 @WebServlet(asyncSupported = true, urlPatterns = { "/RoomDetails" })
 public class RoomDetailController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	private final RoomService roomService = new RoomService();
-    private final RedirectionUtil util = new RedirectionUtil();
+	private final RedirectionUtil util = new RedirectionUtil();
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String roomIdStr = req.getParameter("id");
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String roomIdStr = req.getParameter("id");
 
-        if (roomIdStr == null) {
-            resp.sendRedirect("rooms");
-            return;
-        }
+		if (roomIdStr == null) {
+			resp.sendRedirect("rooms");
+			return;
+		}
 
-        try {
-            int roomId = Integer.parseInt(roomIdStr);
-            List<RoomModel> rooms = roomService.getAllRooms();
+		try {
+			int roomId = Integer.parseInt(roomIdStr);
+			List<RoomModel> rooms = roomService.getAllRooms();
 
-            for (RoomModel room : rooms) {
-                if (room.getRoom_ID() == roomId) {
-                    req.setAttribute("room", room);
-                    util.redirectToPage(req, resp, RedirectionUtil.roomdUrl); // assuming room1.jsp is the detail page
-                    return;
-                }
-            }
+			for (RoomModel room : rooms) {
+				if (room.getRoom_ID() == roomId) {
+					req.setAttribute("room", room);
+					util.redirectToPage(req, resp, RedirectionUtil.roomdUrl);
+					return;
+				}
+			}
 
-            util.setMsgAndRedirect(req, resp, "error", "Room not found.", RedirectionUtil.roomsUrl);
+			util.setMsgAndRedirect(req, resp, "error", "Room not found.", RedirectionUtil.roomsUrl);
 
-        } catch (NumberFormatException e) {
-            util.setMsgAndRedirect(req, resp, "error", "Invalid room ID format.", RedirectionUtil.roomsUrl);
-        }
-    }
-
+		} catch (NumberFormatException e) {
+			util.setMsgAndRedirect(req, resp, "error", "Invalid room ID format.", RedirectionUtil.roomsUrl);
+		}
+	}
 
 }

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 
-<%@ page import="java.util.Map" %>
+<%@ page import="java.util.Map"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -136,7 +136,6 @@ h2 {
 	align-items: center;
 	width: 100%;
 	margin-top: 20px;
-	
 }
 
 .chart-box {
@@ -148,7 +147,6 @@ h2 {
 	width: 350px; /* Optional: sets a consistent width */
 	margin: 0 auto; /* Ensures it's centered within parent */
 }
-
 
 .chart-box h3 {
 	margin-bottom: 15px;
@@ -178,8 +176,8 @@ h2 {
 				<li><a href="${pageContext.request.contextPath}/book-room">Bookings</a></li>
 				<li><a href="${pageContext.request.contextPath}/manage-rooms">Manage
 						Rooms</a></li>
-						
-                <li><a href="${pageContext.request.contextPath}/Profile">Profile</a></li>
+
+				<li><a href="${pageContext.request.contextPath}/Profile">Profile</a></li>
 				<li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
 			</ul>
 		</div>
@@ -237,19 +235,15 @@ h2 {
 				<div class="chart-box">
 					<h3>Room Types Distribution</h3>
 					<canvas id="roomTypePieChart" width="300" height="300"></canvas>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+					<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+					<script>
     const roomTypeLabels = [
-        <% 
-            Map<String, Integer> roomTypeMap = (Map<String, Integer>) request.getAttribute("roomTypeMap");
-            for (String key : roomTypeMap.keySet()) { 
-        %>"<%= key %>",<% } %>
+        <%Map<String, Integer> roomTypeMap = (Map<String, Integer>) request.getAttribute("roomTypeMap");
+for (String key : roomTypeMap.keySet()) {%>"<%=key%>",<%}%>
     ];
     
     const roomTypeData = [
-        <% 
-            for (Integer value : roomTypeMap.values()) { 
-        %><%= value %>,<% } %>
+        <%for (Integer value : roomTypeMap.values()) {%><%=value%>,<%}%>
     ];
 
     const ctx = document.getElementById('roomTypePieChart').getContext('2d');
@@ -279,7 +273,7 @@ h2 {
 </script>
 
 				</div>
-				
+
 			</div>
 		</div>
 	</div>

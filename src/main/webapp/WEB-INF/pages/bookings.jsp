@@ -8,116 +8,117 @@
 <title>Booked Rooms</title>
 <style>
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-                url('${pageContext.request.contextPath}/images/background.png') no-repeat center center fixed;
-    background-size: cover;
-    color: #fff;
-    min-height: 100vh;
+	margin: 0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+		url('${pageContext.request.contextPath}/images/background.png')
+		no-repeat center center fixed;
+	background-size: cover;
+	color: #fff;
+	min-height: 100vh;
 }
 
 .overlay {
-    display: flex;
-    width: 100%;
-    min-height: 100vh;
+	display: flex;
+	width: 100%;
+	min-height: 100vh;
 }
 
 .sidebar {
-    width: 220px;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(6px);
-    padding: 30px 20px;
-    border-radius: 12px;
-    margin-right: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
+	width: 220px;
+	background-color: rgba(0, 0, 0, 0.7);
+	backdrop-filter: blur(6px);
+	padding: 30px 20px;
+	border-radius: 12px;
+	margin-right: 20px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 }
 
 .nav {
-    list-style: none;
+	list-style: none;
 }
 
 .nav li {
-    margin: 20px 0;
+	margin: 20px 0;
 }
 
 .nav a {
-    text-decoration: none;
-    color: #ffcc00;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    transition: color 0.3s ease;
+	text-decoration: none;
+	color: #ffcc00;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	transition: color 0.3s ease;
 }
 
 .nav a:hover {
-    color: #fff;
+	color: #fff;
 }
 
 .nav .icon {
-    margin-right: 10px;
-    font-size: 18px;
+	margin-right: 10px;
+	font-size: 18px;
 }
+
 .main-content {
-    flex: 1;
-    padding: 40px;
+	flex: 1;
+	padding: 40px;
 }
 
 .card {
-    background-color: rgba(0, 0, 0, 0.4);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(8px);
+	background-color: rgba(0, 0, 0, 0.4);
+	padding: 30px;
+	border-radius: 15px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+	backdrop-filter: blur(8px);
 }
 
 h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #ffcc00;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+	text-align: center;
+	margin-bottom: 30px;
+	color: #ffcc00;
+	text-transform: uppercase;
+	letter-spacing: 1px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: rgba(255, 255, 255, 0.1);
+	width: 100%;
+	border-collapse: collapse;
+	background-color: rgba(255, 255, 255, 0.1);
 }
 
 th, td {
-    padding: 12px 15px;
-    border: 1px solid #555;
-    text-align: center;
-    color: #fff;
+	padding: 12px 15px;
+	border: 1px solid #555;
+	text-align: center;
+	color: #fff;
 }
 
 th {
-    background-color: rgba(255, 204, 0, 0.8);
-    color: #000;
+	background-color: rgba(255, 204, 0, 0.8);
+	color: #000;
 }
 
 tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.05);
+	background-color: rgba(255, 255, 255, 0.05);
 }
 
 .action-btn, button {
-    padding: 8px 16px;
-    background-color: #ffcc00;
-    color: #000;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+	padding: 8px 16px;
+	background-color: #ffcc00;
+	color: #000;
+	border: none;
+	border-radius: 6px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .action-btn:hover, button:hover {
-    background-color: #e6b800;
-    transform: translateY(-1px);
+	background-color: #e6b800;
+	transform: translateY(-1px);
 }
-
 </style>
 </head>
 <body>

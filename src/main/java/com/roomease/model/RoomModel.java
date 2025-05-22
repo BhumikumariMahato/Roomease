@@ -122,6 +122,4 @@ public class RoomModel {
 		this.location_ID = location_ID;
 	}
 
-	
-
 }
